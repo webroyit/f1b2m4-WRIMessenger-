@@ -6,6 +6,8 @@ function App() {
   const [messages, setMessages] = useState([]);
 
   const sendMessage = event => {
+    event.preventDefault();
+
     // `...` to get a copy of the array
     setMessages([...messages, input]);
 
@@ -15,8 +17,10 @@ function App() {
   return (
     <div className="App">
       <h1>WRI Messenger</h1>
-      <input value={input} onChange={event => setInput(event.target.value)} />
-      <button onClick={sendMessage}>Send Message</button>
+      <form>
+        <input value={input} onChange={event => setInput(event.target.value)} />
+        <button type="submit" onClick={sendMessage}>Send Message</button>
+      </form>
 
       {
         messages.map((message, index) => (

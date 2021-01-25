@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
 
 import './App.css';
@@ -7,6 +7,13 @@ import Message from './Message';
 function App() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    setUsername(prompt('Please enter your name'));
+
+    // if its blank inside [], this code runs ONCE when the app component loads
+  }, [input])   // Condition
 
   const sendMessage = event => {
     event.preventDefault();
@@ -20,6 +27,7 @@ function App() {
   return (
     <div className="App">
       <h1>WRI Messenger</h1>
+      <h2>{username}</h2>
       <form>
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>

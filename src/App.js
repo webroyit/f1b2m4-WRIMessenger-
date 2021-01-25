@@ -13,13 +13,13 @@ function App() {
     setUsername(prompt('Please enter your name'));
 
     // if its blank inside [], this code runs ONCE when the app component loads
-  }, [input])   // Condition
+  }, [])   // Condition
 
   const sendMessage = event => {
     event.preventDefault();
 
     // `...` to get a copy of the array
-    setMessages([...messages, input]);
+    setMessages([...messages, {username: username, text: input}]);
 
     setInput('');
   }
@@ -45,7 +45,7 @@ function App() {
 
       {
         messages.map((message, index) => (
-          <Message text={message} key={index} />
+          <Message username={message.username} text={message.text} key={index} />
         ))
       }
     </div>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
+
 import './App.css';
+import Message from './Message';
 
 function App() {
   const [input, setInput] = useState('');
@@ -30,12 +32,12 @@ function App() {
             onClick={sendMessage}>
               Send Message
           </Button>
-      </FormControl>
+        </FormControl>
       </form>
 
       {
         messages.map((message, index) => (
-          <p key={index}>{message}</p>
+          <Message text={message} key={index} />
         ))
       }
     </div>

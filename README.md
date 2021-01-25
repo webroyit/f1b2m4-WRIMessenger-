@@ -1,4 +1,4 @@
 # WRI Messenger
 
 ## Notes
-- <form> can listen for 'enter' key pressed
+- `<form>` can listen for 'enter' key pressed

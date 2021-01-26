@@ -14,9 +14,14 @@ function App() {
   // Run once when the app component loads
   useEffect(() => {
     // 'onSnapshot()' get the data from firebase in realtime 
-    db.collection('messages').onSnapshot(snapshot => {
-      setMessages(snapshot.docs.map(doc => doc.data()))
-    })
+    db
+      .collection('messages')
+      // Sort the messages by date
+      .orderBy('timestamp', 'desc')
+      .onSnapshot(snapshot => {
+        setMessages(snapshot.docs.map(doc => doc.data()))
+      })
+      
   }, []);
 
   useEffect(() => {
@@ -34,9 +39,6 @@ function App() {
       // Use the timezone that is set on firebase
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
-
-    // `...` to get a copy of the array
-    setMessages([...messages, {username: username, text: input}]);
 
     setInput('');
   }

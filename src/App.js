@@ -6,7 +6,7 @@ import Message from './Message';
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{username: 'Test', text: 'Hi'}]);
   const [username, setUsername] = useState('');
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function App() {
 
       {
         messages.map((message, index) => (
-          <Message username={message.username} text={message.text} key={index} />
+          <Message username={username} message={message} key={index} />
         ))
       }
     </div>

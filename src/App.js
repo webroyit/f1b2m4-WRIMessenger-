@@ -2,12 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
 
 import './App.css';
+import db from './firebase';
 import Message from './Message';
 
 function App() {
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([{username: 'Test', text: 'Hi'}]);
+  const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState('');
+
+  // Run once when the app component loads
+  useEffect(() => {
+    // 'onSnapshot()' get the data from firebase in realtime 
+    db.collection('messages').onSnapshot(snapshot => {
+      setMessages(snapshot.docs.map(doc => doc.data()))
+    })
+  }, []);
 
   useEffect(() => {
     setUsername(prompt('Please enter your name'));

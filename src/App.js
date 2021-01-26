@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
+import firebase from 'firebase';
 
 import './App.css';
 import db from './firebase';
@@ -26,6 +27,13 @@ function App() {
 
   const sendMessage = event => {
     event.preventDefault();
+
+    db.collection('messages').add({
+      text: input,
+      username: username,
+      // Use the timezone that is set on firebase
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
 
     // `...` to get a copy of the array
     setMessages([...messages, {username: username, text: input}]);

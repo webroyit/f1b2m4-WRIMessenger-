@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
+import { FormControl, InputLabel, Input, IconButton } from '@material-ui/core';
 import firebase from 'firebase';
 import FlipMove from 'react-flip-move';
+import SendIcon from '@material-ui/icons/Send';
 
 import './App.css';
 import db from './firebase';
@@ -48,18 +49,18 @@ function App() {
     <div className="App">
       <h1>WRI Messenger</h1>
       <h2>{username}</h2>
-      <form>
+      <form className="app__form">
         <FormControl>
           <InputLabel>Enter a message...</InputLabel>
           <Input value={input} onChange={event => setInput(event.target.value)} />
-          <Button
+          <IconButton
             disabled={!input}
             variant="contained"
             color="primary"
             type="submit"
             onClick={sendMessage}>
-              Send Message
-          </Button>
+              <SendIcon />
+          </IconButton>
         </FormControl>
       </form>
 

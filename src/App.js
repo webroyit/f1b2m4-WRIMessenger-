@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import firebase from 'firebase';
+import FlipMove from 'react-flip-move';
 
 import './App.css';
 import db from './firebase';
@@ -19,7 +20,7 @@ function App() {
       // Sort the messages by date
       .orderBy('timestamp', 'desc')
       .onSnapshot(snapshot => {
-        setMessages(snapshot.docs.map(doc => doc.data()))
+        setMessages(snapshot.docs.map(doc => ({ id: doc.id, message: doc.data() })))
       })
       
   }, []);
@@ -62,11 +63,14 @@ function App() {
         </FormControl>
       </form>
 
-      {
-        messages.map((message, index) => (
-          <Message username={username} message={message} key={index} />
-        ))
-      }
+      {/* Each element must have key for FlipMove to work*/}
+      <FlipMove>
+        {
+          messages.map(({message, id}) => (
+            <Message username={username} message={message} key={id} />
+          ))
+        }
+      </FlipMove>
     </div>
   );
 }

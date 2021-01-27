@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 
 import './Message.css';
 
-function Message({ username, message, index }) {
+// This is high order function
+const Message = forwardRef (({ username, message, index }, ref) => {
     const isUser = username === message.username;
 
     return (
-        <Card className={`message ${isUser ? 'message__user message__userCard' : 'message__guestCard'}`} key={index}>
+        <Card ref={ref} className={`message ${isUser ? 'message__user message__userCard' : 'message__guestCard'}`} key={index}>
             <CardContent>
                 <Typography
                     color="white"
@@ -19,6 +20,6 @@ function Message({ username, message, index }) {
             </CardContent>
         </Card>
     )
-}
+})
 
 export default Message;

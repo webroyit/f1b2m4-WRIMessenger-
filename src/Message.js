@@ -15,7 +15,7 @@ const Message = forwardRef (({ username, message, index }, ref) => {
                     variant="h5"
                     component="h2"
                 >
-                    {message.username}: {message.text}
+                    {!isUser && `${message.username || "Unknown User"}: `} {message.text}
                 </Typography>
             </CardContent>
         </Card>

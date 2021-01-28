@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="App">
       <h1>WRI Messenger</h1>
-      <h2>{username}</h2>
+      <h2>Welcome {username || "Guest"}</h2>
       <form className="app__form">
         <FormControl className="app__formControl">
           <Input className="app__input" placeholder="Enter a message..." value={input} onChange={event => setInput(event.target.value)} />
